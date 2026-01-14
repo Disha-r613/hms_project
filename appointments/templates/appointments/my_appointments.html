@@ -1,0 +1,14 @@
+<h2>My Appointments</h2>
+
+<ul>
+    {% for a in appointments %}
+        <li>
+            Doctor: {{ a.slot.doctor.username }} <br>
+            Date: {{ a.slot.date }} <br>
+            Time: {{ a.slot.start_time }} - {{ a.slot.end_time }}
+        </li>
+        <hr>
+    {% empty %}
+        <p>No appointments booked.</p>
+    {% endfor %}
+</ul>

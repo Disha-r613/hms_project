@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Appointment</title>
+</head>
+<body>
+
+<h2>Book Appointment</h2>
+
+{% if slots %}
+<form method="post">
+    {% csrf_token %}
+
+    <label>Select Time Slot:</label><br><br>
+
+    <select name="slot" required>
+        {% for slot in slots %}
+            <option value="{{ slot.id }}">
+                {{ slot.date }} | {{ slot.start_time }} - {{ slot.end_time }} | Dr {{ slot.doctor.username }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+    <button type="submit">Book</button>
+</form>
+{% else %}
+    <p>No available slots.</p>
+{% endif %}
+
+</body>
+</html>
