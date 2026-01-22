@@ -56,18 +56,20 @@ ROOT_URLCONF = "hms_project.urls"
 
 TEMPLATES = [
     {
-        "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
-        "APP_DIRS": True,
-        "OPTIONS": {
-            "context_processors": [
-                "django.template.context_processors.request",
-                "django.contrib.auth.context_processors.auth",
-                "django.contrib.messages.context_processors.messages",
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,   # 🔥 THIS is key
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
             ],
         },
     },
 ]
+
 
 WSGI_APPLICATION = "hms_project.wsgi.application"
 
@@ -120,8 +122,17 @@ USE_TZ = True
 STATIC_URL = "static/"
 AUTH_USER_MODEL = 'users.User'
 # EMAIL CONFIG (LOCAL / MOCK)
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'noreply@hms.com'
+
+LOGIN_REDIRECT_URL = '/appointments/book/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+LOGIN_URL = '/accounts/login/'
+#LOGIN_REDIRECT_URL = '/appointments/book/'
+#LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 
 

@@ -20,7 +20,7 @@ class TimeSlot(models.Model):
         ordering = ['date', 'start_time']
 
     def __str__(self):
-        return f"{self.doctor.username} | {self.date} | {self.start_time} - {self.end_time}"
+        return f"{self.doctor} | {self.date} | {self.start_time}-{self.end_time}"
 
 
 class Appointment(models.Model):
@@ -29,14 +29,13 @@ class Appointment(models.Model):
         on_delete=models.CASCADE,
         limit_choices_to={'is_patient': True}
     )
-    slot = models.OneToOneField(
-        TimeSlot,
-        on_delete=models.CASCADE
-    )
+    slot = models.OneToOneField(TimeSlot, on_delete=models.CASCADE)
+    date = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
-        # auto mark slot as booked
+        # auto fill date from slot
+        self.date = self.slot.date
         self.slot.is_booked = True
         self.slot.save()
         super().save(*args, **kwargs)

@@ -5,9 +5,17 @@
 </head>
 <body>
 
-<h2>Appointment Booked Successfully ✅</h2>
+<h2>Appointment Booked Successfully 🎉</h2>
 
-<a href="/appointments/book/">Book Another</a>
+{% if calendar_link %}
+<p>
+    <a href="{{ calendar_link }}" target="_blank">
+        ➕ Add to Google Calendar
+    </a>
+</p>
+{% endif %}
+
+<p><a href="/appointments/my/">View My Appointments</a></p>
 
 </body>
 </html>

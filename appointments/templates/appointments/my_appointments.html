@@ -1,14 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Appointments</title>
+</head>
+<body>
+
 <h2>My Appointments</h2>
 
-<ul>
-    {% for a in appointments %}
+{% if appointments %}
+    <ul>
+    {% for appt in appointments %}
         <li>
-            Doctor: {{ a.slot.doctor.username }} <br>
-            Date: {{ a.slot.date }} <br>
-            Time: {{ a.slot.start_time }} - {{ a.slot.end_time }}
+            {{ appt.slot.date }} |
+            {{ appt.slot.start_time }} - {{ appt.slot.end_time }} |
+            Dr {{ appt.slot.doctor.username }}
         </li>
-        <hr>
-    {% empty %}
-        <p>No appointments booked.</p>
     {% endfor %}
-</ul>
+    </ul>
+{% else %}
+    <p>No appointments yet.</p>
+{% endif %}
+
+</body>
+</html>
